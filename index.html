@@ -1,0 +1,258 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  X, 
+  Play, 
+  Sparkles, 
+  Zap,
+  ImageIcon,
+  Monitor,
+  Youtube,
+  Quote,
+  Star,
+  PlayCircle,
+  ChevronRight,
+  MousePointer2
+} from 'lucide-react';
+
+export default function App() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeVideo, setActiveVideo] = useState(null);
+  const [reveal, setReveal] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    setTimeout(() => setReveal(true), 100);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Skill-er talika (Skills List)
+  const mySkills = [
+    { icon: <ImageIcon className="text-pink-500" size={24} />, label: "Graphics Design" },
+    { icon: <Monitor className="text-blue-500" size={24} />, label: "Web Template" },
+    { icon: <Youtube className="text-red-500" size={24} />, label: "YouTube Thumbnail" },
+    { icon: <Zap className="text-yellow-500" size={24} />, label: "UI/UX Expert" }
+  ];
+
+  // Static Chhobi (Portfolio Images)
+  const portfolioImages = [
+    { id: 1, img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=800", title: "Gaming Hub", category: "Thumbnail" },
+    { id: 2, img: "https://images.unsplash.com/photo-1618519764620-7403abdbbe9d?q=80&w=800", title: "Tech Pulse", category: "Design" },
+    { id: 3, img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800", title: "Creative Vlog", category: "Thumbnail" },
+    { id: 4, img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800", title: "Agency Pro", category: "Web" },
+  ];
+
+  // 10-ti demo video
+  const demoVideos = [
+    { id: 1, title: "Modern Setup", url: "https://www.w3schools.com/html/mov_bbb.mp4", thumb: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=600" },
+    { id: 2, title: "Coding Flow", url: "https://www.w3schools.com/html/movie.mp4", thumb: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600" },
+    { id: 3, title: "Design Process", url: "https://www.w3schools.com/html/mov_bbb.mp4", thumb: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=600" },
+    { id: 4, title: "Laptop Work", url: "https://www.w3schools.com/html/movie.mp4", thumb: "https://images.unsplash.com/photo-1542744094-24638eff58bb?q=80&w=600" },
+    { id: 5, title: "Tech Innovation", url: "https://www.w3schools.com/html/mov_bbb.mp4", thumb: "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?q=80&w=600" },
+    { id: 6, title: "Workspace Vibe", url: "https://www.w3schools.com/html/movie.mp4", thumb: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600" },
+    { id: 7, title: "Clean Interfaces", url: "https://www.w3schools.com/html/mov_bbb.mp4", thumb: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=600" },
+    { id: 8, title: "Studio Light", url: "https://www.w3schools.com/html/movie.mp4", thumb: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=600" },
+    { id: 9, title: "Night Coding", url: "https://www.w3schools.com/html/mov_bbb.mp4", thumb: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?q=80&w=600" },
+    { id: 10, title: "Final Edit", url: "https://www.w3schools.com/html/movie.mp4", thumb: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=600" }
+  ];
+
+  // 10-ti 5-star review
+  const testimonials = [
+    { name: "SOHAG H.", text: "Ato sundor thumbnail banay, chinta kora jay na! Views onek bereche.", role: "Youtuber" },
+    { name: "ALEX J.", text: "Clean and professional web design. High-quality work, highly satisfied.", role: "CEO, TechFlow" },
+    { name: "RAHUL D.", text: "Best value for money. Communication is great and delivery was fast.", role: "Content Creator" },
+    { name: "MARIA S.", text: "The color sense and typography are elite. Pritam is a pro designer.", role: "Brand Manager" },
+    { name: "JAMES K.", text: "Exceeded my expectations! The UI is very intuitive and modern.", role: "Startup Founder" },
+    { name: "TANVIR A.", text: "Amazing graphics quality. He understands the brand vibe perfectly.", role: "Influencer" },
+    { name: "SOPHIA L.", text: "Friendly behavior and super creative work. Highly recommended for all.", role: "Marketing Head" },
+    { name: "KABIR R.", text: "Durdanto kaj! Tar thumbnail design-er CTR khub bhalo thake.", role: "Gamer" },
+    { name: "ELENA G.", text: "Very professional and unique style. Will hire him again for sure.", role: "Artist" },
+    { name: "ARIFUL I.", text: "Fastest delivery I've ever seen. Quality was top-notch.", role: "Social Media Manager" }
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-blue-500/30">
+      
+      {/* Background Glows */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/10 blur-[150px] rounded-full animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/10 blur-[150px] rounded-full animate-pulse"></div>
+      </div>
+
+      {/* Video Modal */}
+      {activeVideo && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-3xl animate-in fade-in zoom-in duration-300">
+          <button 
+            onClick={() => setActiveVideo(null)} 
+            className="absolute top-6 right-6 text-white/50 hover:text-white transition-all bg-white/5 p-4 rounded-full border border-white/10"
+          >
+            <X size={32} />
+          </button>
+          <div className="w-full max-w-5xl aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(59,130,246,0.3)]">
+            <video key={activeVideo} autoPlay controls className="w-full h-full object-contain">
+              <source src={activeVideo} type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      )}
+
+      {/* Navbar */}
+      <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-black/80 backdrop-blur-xl py-4 border-b border-white/5' : 'bg-transparent py-8'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-3 group cursor-pointer">
+            <div className="w-12 h-12 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center font-black group-hover:rotate-[360deg] transition-all duration-1000">P</div>
+            <span className="text-2xl font-black tracking-tighter">PRITAM</span>
+          </div>
+          <div className="hidden md:flex gap-8 items-center">
+            {["Work", "Reels", "Reviews"].map(item => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="text-sm font-bold uppercase tracking-widest text-zinc-400 hover:text-blue-500 transition-all">
+                {item === "Work" ? "Portfolio" : item}
+              </a>
+            ))}
+            <a href="#contact" className="px-8 py-3 bg-blue-600 text-white font-black uppercase tracking-tighter rounded-full hover:bg-white hover:text-black transition-all">Hire Me</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative h-screen flex flex-col items-center justify-center px-6 text-center">
+        <div className={`transition-all duration-1000 ${reveal ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+          <div className="inline-block mb-6 px-6 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full text-blue-400 text-[10px] font-black uppercase tracking-[0.4em] animate-pulse">
+             Graphic Designer & Developer
+          </div>
+          
+          <h2 className="text-blue-500 text-lg md:text-3xl font-black uppercase tracking-[0.8em] mb-4 drop-shadow-xl">MY PORTFOLIO</h2>
+
+          <h1 className="text-6xl md:text-[11rem] font-black tracking-tighter leading-[0.8] mb-12 uppercase italic">
+            DESIGN <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-400 to-purple-600">LIMITLESS</span>
+          </h1>
+
+          <p className="text-zinc-400 text-lg md:text-2xl max-w-3xl mx-auto font-medium leading-relaxed mb-12">
+            I craft <span className="text-white">Professional Thumbnails</span>, <span className="text-white">Modern Web Layouts</span>, and <span className="text-white">Motion Graphics</span> that drive results.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            {mySkills.map((s, i) => (
+              <div key={i} className="flex items-center gap-3 px-6 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl hover:bg-white/10 hover:scale-105 transition-all duration-300">
+                {s.icon}
+                <span className="text-[10px] font-black uppercase tracking-widest">{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="absolute bottom-10 animate-bounce text-zinc-700">
+          <MousePointer2 size={32} />
+        </div>
+      </section>
+
+      {/* Photo Work Section */}
+      <section id="work" className="py-32 px-6 max-w-7xl mx-auto">
+        <div className="mb-20">
+            <span className="text-blue-500 font-black uppercase tracking-widest text-xs">Gallery</span>
+            <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter">PHOTO WORK</h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {portfolioImages.map((item) => (
+            <div key={item.id} className="group relative rounded-[3rem] overflow-hidden bg-zinc-900 border border-white/5 transition-all duration-700">
+              <img src={item.img} className="w-full h-64 md:h-[500px] object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0" alt={item.title} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-12 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-500">
+                <span className="text-blue-500 font-black uppercase tracking-widest text-xs mb-2">{item.category}</span>
+                <h3 className="text-4xl font-black uppercase">{item.title}</h3>
+              </div>
+              <div className="absolute top-8 left-8 bg-zinc-800/80 backdrop-blur-md px-4 py-1 rounded-full text-[10px] font-bold border border-white/10 uppercase tracking-widest">
+                Static Image
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Video Showcase */}
+      <section id="reels" className="py-32 bg-[#080808] border-y border-white/5 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-24">
+            <h2 className="text-6xl md:text-9xl font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-900">THE REELS</h2>
+            <p className="text-blue-500 font-bold tracking-[0.6em] uppercase text-xs mt-4">10 EXCLUSIVE VIDEO DEMOS</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            {demoVideos.map((vid) => (
+              <div 
+                key={vid.id} 
+                onClick={() => setActiveVideo(vid.url)}
+                className="group relative cursor-pointer transform transition-all duration-500 hover:-translate-y-4"
+              >
+                <div className="aspect-[9/16] rounded-[2rem] overflow-hidden border-2 border-white/5 group-hover:border-blue-500 shadow-2xl relative">
+                  <img src={vid.thumb} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt={vid.title} />
+                  
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-transparent transition-all">
+                    <div className="w-20 h-20 bg-red-600 rounded-3xl flex items-center justify-center shadow-[0_0_40px_rgba(220,38,38,0.6)] group-hover:scale-125 transition-all duration-500">
+                       <Play size={32} fill="white" className="text-white ml-1" />
+                    </div>
+                  </div>
+
+                  <div className="absolute top-6 left-6 bg-blue-600 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-tighter">
+                    DEMO {vid.id}
+                  </div>
+                </div>
+                <h4 className="mt-6 text-[10px] font-black uppercase tracking-widest text-center text-zinc-600 group-hover:text-blue-500 transition-colors">
+                  {vid.title}
+                </h4>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews (10 Testimonials with 5 Stars) */}
+      <section id="reviews" className="py-32 px-6 max-w-7xl mx-auto">
+         <div className="text-center mb-24">
+            <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter italic text-blue-600 underline">CLIENT VOICES</h2>
+            <p className="mt-4 text-zinc-500 font-bold tracking-widest uppercase text-xs">What 10 Global Clients Say About Me</p>
+         </div>
+         
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((t, i) => (
+              <div key={i} className="p-10 rounded-[3rem] bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition-all group flex flex-col h-full shadow-2xl">
+                <div className="flex gap-1 mb-6">
+                  {[...Array(5)].map((_, starIdx) => (
+                    <Star key={starIdx} size={18} fill="#3b82f6" className="text-blue-600 shadow-blue-500" />
+                  ))}
+                </div>
+                <Quote className="text-blue-600/20 mb-6 group-hover:text-blue-600 transition-colors" size={40} />
+                <p className="text-zinc-400 italic text-lg mb-10 leading-relaxed flex-grow">"{t.text}"</p>
+                <div className="flex items-center gap-4 border-t border-white/5 pt-6">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-900 flex items-center justify-center font-black shadow-lg">
+                    {t.name[0]}
+                  </div>
+                  <div>
+                    <h5 className="font-black text-xs uppercase tracking-widest">{t.name}</h5>
+                    <span className="text-[10px] text-blue-500 font-bold uppercase">{t.role}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+         </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-48 px-6 text-center">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-6xl md:text-[10rem] font-black uppercase mb-16 tracking-tighter leading-none animate-pulse">HIRE <br /> <span className="text-blue-600">ME</span></h2>
+          <a href="mailto:p99696027@gmail.com" className="text-xl md:text-5xl font-black text-white hover:text-blue-500 transition-all border-b-4 border-blue-900 pb-4 duration-500 italic">
+            p99696027@gmail.com
+          </a>
+        </div>
+      </section>
+
+      <footer className="py-12 text-center border-t border-white/5 bg-black">
+        <p className="text-[10px] font-black uppercase tracking-[1em] text-zinc-800">PRITAM DESIGN STUDIO • 2026</p>
+      </footer>
+    </div>
+  );
+}
